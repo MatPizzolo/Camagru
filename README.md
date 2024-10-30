@@ -2,7 +2,11 @@
 
 ## Overview
 
-This project is a PHP application named Camagru. It has been structured to follow best practices for a MVC web application.
+An instagram-like website allowing its users to create and share photomontage.
+It has been structured to follow best practices for a MVC web application.
+
+A project for 42Madrid
+[Subject](img/en.subject.pdf)
 
 ## Project Structure
     .
