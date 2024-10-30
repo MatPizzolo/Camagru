@@ -2,7 +2,11 @@
 
 ## Overview
 
-This project is a PHP application named Camagru. It has been structured to follow best practices for a MVC web application.
+An instagram-like website allowing its users to create and share photomontage.
+It has been structured to follow best practices for a MVC web application.
+
+A project for 42Madrid
+[Subject](img/en.subject.pdf)
 
 ## Project Structure
     .
@@ -19,14 +23,15 @@ This project is a PHP application named Camagru. It has been structured to follo
 ### 1. Using PHP's Built-in Server
 
 1. Move to the \`public\` directory:
-   \`\`\`bash
+2. 
+   ```bash
    cd public
-   \`\`\`
-2. Start the built-in PHP server:
-   \`\`\`bash
+   ```
+3. Start the built-in PHP server:
+   ```bash
    php -S localhost:8000
-   \`\`\`
-3. Open your web browser and navigate to \`http://localhost:8000\` to access the application.
+   ```
+4. Open your web browser and navigate to \`http://localhost:8000\` to access the application.
 
 ### 2. Database Configuration
 
