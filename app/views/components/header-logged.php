@@ -10,10 +10,13 @@
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-light bg-primary-subtle">
+<nav class="navbar navbar-light bg-light">
     <div class="container-fluid d-flex justify-content-between align-items-center">
         <div class="flex-grow-1 text-center">
             <img src="/assets/logos/simple-logo.jpg" alt="Logo" style="max-height: 50px;">
         </div>
+        <form action="logout.php" method="POST" class="d-flex">
+            <button type="submit" class="btn btn-danger">Sign Out</button>
+        </form>
     </div>
 </nav>
