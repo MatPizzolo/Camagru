@@ -9,7 +9,7 @@ A project for 42Madrid
 [Subject](img/en.subject.pdf)
 
 ## Stack
-Server-side - PHP, PostgreSQL<br>
+Server-side - PHP, MySQL<br>
 Client-side - HTML, CSS, JS<br>
 structure - MVC
 
