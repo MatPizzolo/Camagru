@@ -8,6 +8,11 @@ It has been structured to follow best practices for a MVC web application.
 A project for 42Madrid
 [Subject](img/en.subject.pdf)
 
+## Stack
+Server-side - PHP, PostgreSQL<br>
+Client-side - HTML, CSS, JS<br>
+structure - MVC
+
 ## Project Structure
     .
     ├── app/                 # Core application logic (controllers, models)
