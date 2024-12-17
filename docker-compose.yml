@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  app:
+    image: php:8.1-apache
+    container_name: php_app
+    ports:
+      - "8000:80"
+    volumes:
+      - ./public:/var/www/html      # Public folder as Apache web root
+      - ./app:/var/www/app          # App logic
+      - ./config:/var/www/config    # Configurations
+      - ./routes:/var/www/routes    # Routes folder
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+    command: >
+      bash -c "docker-php-ext-install pdo pdo_mysql &&
+               a2enmod rewrite &&
+               apache2-foreground"
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: mateo        # Root password
+      MYSQL_DATABASE: webapp            # Initial database name
+      MYSQL_USER: root                  # Root user (matches database.php)
+      MYSQL_PASSWORD: mateo             # Password for 'root'
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql          # Persistent database storage
+      - ./dbsetup.sql:/docker-entrypoint-initdb.d/dbsetup.sql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db                      # MySQL service name
+      MYSQL_ROOT_PASSWORD: mateo        # Root password to access db
+    depends_on:
+      - db
+
+volumes:
+  db_data:
