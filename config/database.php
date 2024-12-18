@@ -6,7 +6,7 @@ class Database {
 
     public static function getConnection() {
         if (self::$connection === null) {
-            $host = '127.0.0.1';
+            $host = 'mysql_db';
             $dbname = 'webapp';
             $username = 'root';
             $password = 'mateo';

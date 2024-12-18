@@ -20,20 +20,22 @@ services:
     depends_on:
       - db
     restart: always
+    networks:
+      - app_network
 
   db:
     image: mysql:8.0
     container_name: mysql_db
     environment:
-      MYSQL_ROOT_PASSWORD: mateo        # Root password
       MYSQL_DATABASE: webapp            # Initial database name
-      MYSQL_USER: root                  # Root user (matches database.php)
-      MYSQL_PASSWORD: mateo             # Password for 'root'
+      MYSQL_ROOT_PASSWORD: mateo        # Root password
     ports:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql          # Persistent database storage
-      - ./dbsetup.sql:/docker-entrypoint-initdb.d/dbsetup.sql
+      - ./config/dbsetup.sql:/docker-entrypoint-initdb.d/dbsetup.sql
+    networks:
+      - app_network
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -48,3 +50,7 @@ services:
 
 volumes:
   db_data:
+
+networks:
+  app_network:
+    driver: bridge
