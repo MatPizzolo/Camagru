@@ -7,10 +7,10 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - ./public:/var/www/html      # Public folder as Apache web root
-      - ./app:/var/www/app          # App logic
-      - ./config:/var/www/config    # Configurations
-      - ./routes:/var/www/routes    # Routes folder
+      - ./app/public:/var/www/html 
+      - ./app/src:/var/www/app 
+      - ./config:/var/www/config 
+      - ./app/routes:/var/www/html/routes
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html
     command: >

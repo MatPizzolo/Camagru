@@ -15,21 +15,7 @@ if (!Database::isConnected()) {
     error_log("Successfully connected to the database!");
 }
 
-// require_once __DIR__ . '/../routes/web.php';
-
-require_once __DIR__ . '/../app/Router.php';
-require_once __DIR__ . '/../app/Controllers/HomeController.php';
-
-$router = new Router();
-
-// Define routes
-$router->add('/', [HomeController::class, 'index']);
-$router->add('/about', function () {
-    echo "About Page";
-});
-
-// Dispatch based on the current URI
-$router->dispatch($_SERVER['REQUEST_URI']);
+require_once __DIR__ . '/routes/web.php';
 
 
 
