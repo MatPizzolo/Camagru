@@ -1,6 +1,8 @@
 <?php
 
 // /public/index.php
+ob_start();
+session_start();
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -16,8 +18,5 @@ if (!Database::isConnected()) {
 }
 
 require_once __DIR__ . '/routes/web.php';
-
-
-
 
 ?>
