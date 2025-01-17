@@ -75,7 +75,7 @@ function validatePassword() {
   }
 }
 
-const tryFormPost = async () => {
+const tryFormPostRegister = async () => {
   const username = document.getElementById("usernameRegister").value;
   const password = document.getElementById("passwordRegister").value;
   const email = document.getElementById("emailRegister").value;
@@ -113,15 +113,16 @@ function displayError(message) {
   console.log(`ERROR: ${message}`);
 }
 
-const form = document.getElementById("signupForm");
-form.addEventListener(
+const formRegister = document.getElementById("signupForm");
+formRegister.addEventListener(
   "submit",
   function (event) {
     event.preventDefault();
     if (!validateUsername() || !validateEmail() || !validatePassword()) {
+      displayError(`Error in user, email or password verification`);
       return;
     }
-    tryFormPost();
+    tryFormPostRegister();
   },
   false
 );

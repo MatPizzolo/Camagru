@@ -8,6 +8,7 @@ services:
       - "8000:80"
     volumes:
       - ./app/server/api:/var/www/app
+      - ./app/server/uploads:/var/www/uploads
       - ./app/server/public:/var/www/html
       - ./config:/var/www/config
     environment:

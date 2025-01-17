@@ -1,4 +1,4 @@
 function handleLogout() {
 	sessionStorage.clear();
-	window.location.href = "/";
+	window.location.href = "/register";
 }

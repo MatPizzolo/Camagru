@@ -28,30 +28,32 @@ async function makeRequest(useCsrf, url, options, queries) {
   //   }
   // }
 
-  const JWTToken = sessionStorage.getItem("jwt");
-  console.log(JWTToken);
-  if (JWTToken) {
-    options.headers = {
-      ...options.headers,
-      Authorization: `Bearer ${JWTToken}`,
-    };
-  } else {
-    console.log("LADRON ! JWT not correct");
-    return;
+  if (useCsrf) {
+    const JWTToken = sessionStorage.getItem("jwt");
+    if (JWTToken) {
+      options.headers = {
+        ...options.headers,
+        Authorization: `Bearer ${JWTToken}`,
+      };
+    } else {
+      console.log("LADRON ! JWT not correct");
+      handleLogout();
+      return;
+    }
   }
 
   if (queries) {
     url = `${url}?${queries}`;
   }
-  console.log(url);
-  console.log(options);
-  const response = await fetch(url, options);
 
+  const response = await fetch(url, options);
   if (response.status === 401) {
     // Handle logout or prompt user to log in again
-    alert('Your session has expired or you are not authorized. Please log in again.');
+    alert(
+      "Your session has expired or you are not authorized. Please log in again."
+    );
     handleLogout();
-    window.location.href = '/login'; // Redirect to login page
+    window.location.href = "/login"; // Redirect to login page
   }
 
   // COMMENT IN PRODUCTION ONLY "!!!!!!!!!!!!!"
@@ -93,10 +95,8 @@ const getJWTUserUserId = () => {
   return username;
 };
 
-
 const getUserInfo = async () => {
   const userId = getJWTUserUserId();
-  console.log(userId);
   try {
     const url = `${config.apiBaseUrl}/api/info-me/`;
 
@@ -110,8 +110,7 @@ const getUserInfo = async () => {
     };
 
     const data = await makeRequest(true, url, options);
-    console.log(data);
-    return data.user;
+    return data.data;
   } catch (error) {
     console.error(error);
   }

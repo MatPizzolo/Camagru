@@ -8,7 +8,6 @@ const isLogged = () => {
 const ifLoggedRedirect = (location) => {
 	if (!isLogged()) {
 		if (!allowedLocations.includes(window.location.pathname)) {
-			console.log("router logout");
 			handleLogout();
 		}
 	} else {

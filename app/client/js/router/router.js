@@ -33,7 +33,6 @@ const urlLocationHandler = async () => {
   const currentLocation = window.location.pathname || "/";
 
   ifLoggedRedirect(currentLocation);
-
   const route = urlRoutes[currentLocation] || urlRoutes["404"];
 
   try {
@@ -41,7 +40,6 @@ const urlLocationHandler = async () => {
       fetch(route.template).then((response) => response.text()),
       Promise.resolve(route.css || []),
     ]);
-
     document.getElementById("content").innerHTML = html;
     document.title = route.title;
 
@@ -70,6 +68,23 @@ const urlLocationHandler = async () => {
       navRouter.innerHTML = await fetch(
         direc + "/components/navbar/nav-logged.html"
       ).then((response) => response.text());
+    }
+    const footerRouter = document.getElementById("footer-router");
+    if (
+      footerRouter &&
+      footerRouter.innerHTML.trim() === "" &&
+      isLogged() &&
+      route !== urlRoutes["404"]
+    ) {
+      footerRouter.innerHTML = await fetch(
+        direc + "/components/footer/footer-logged.html"
+      ).then((response) => response.text());
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = `${direc}/components/footer/footer.js`;
+      script.async = false;
+      const body = document.body;
+      body.appendChild(script);
     }
   } catch (error) {
     console.error("Error loading content:", error);

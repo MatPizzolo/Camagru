@@ -38,9 +38,13 @@ $router->add('/api/login', [AuthController::class, 'login'], ['POST']);
 $router->add('/api/info-me/', [UserController::class, 'getUserInfoById'], ['GET'], [AuthMiddleware::class]);
 // $router->add('/api/info-me-id/{userId}', [UserController::class, 'getUserInfoById'], ['GET']);
 
-$router->add('/api/pictures/upload', [PictureController::class, 'uploadPicture'], ['POST'], [AuthMiddleware::class]);
-$router->add('/api/pictures/like', [PictureController::class, 'likePicture'], ['POST'], [AuthMiddleware::class]);
-$router->add('/api/pictures/comment', [PictureController::class, 'commentPicture'], ['POST'], [AuthMiddleware::class]);
+$router->add('/api/pictures/upload', [PictureController::class, 'upload'], ['POST'], [AuthMiddleware::class]);
+$router->add('/api/pictures/posts/', [PictureController::class, 'showPosts'], ['GET'], [AuthMiddleware::class]);
+$router->add('/api/pictures/post/', [PictureController::class, 'showPost'], ['GET'], [AuthMiddleware::class]);
+$router->add('/api/pictures/postLikes/', [PictureController::class, 'getUsersWhoLikedPost'], ['POST'], [AuthMiddleware::class]);
+$router->add('/api/pictures/like', [PictureController::class, 'like'], ['POST'], [AuthMiddleware::class]);
+$router->add('/api/pictures/unlike', [PictureController::class, 'unlike'], ['POST'], [AuthMiddleware::class]);
+$router->add('/api/pictures/comment', [PictureController::class, 'comment'], ['POST'], [AuthMiddleware::class]);
 
 
 
