@@ -47,6 +47,7 @@ async function makeRequest(useCsrf, url, options, queries) {
   }
 
   const response = await fetch(url, options);
+  console.log(response)
   if (response.status === 401) {
     // Handle logout or prompt user to log in again
     alert(
@@ -55,13 +56,6 @@ async function makeRequest(useCsrf, url, options, queries) {
     handleLogout();
     window.location.href = "/login"; // Redirect to login page
   }
-
-  // COMMENT IN PRODUCTION ONLY "!!!!!!!!!!!!!"
-  // if (!response.ok) {
-  //   if (!allowedLocations.includes(window.location.pathname)) {
-  //     handleLogout();
-  //   }
-  // }
 
   const contentType = response.headers.get("content-type");
   if (contentType && contentType.includes("application/json")) {

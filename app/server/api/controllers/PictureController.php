@@ -6,7 +6,7 @@ require_once __DIR__ . '/../models/Like.php';
 require_once __DIR__ . '/../models/Comment.php';
 require_once __DIR__ . '/../utils/jwtUtils.php';
 
-define('UPLOAD_DIR', realpath(__DIR__ . '/../../uploads/'));
+define('UPLOAD_DIR', realpath(__DIR__ . '/../uploads/'));
 
 class PictureController
 {
@@ -37,10 +37,27 @@ class PictureController
 		}
 
 		$image = $_FILES['image'];
-		$targetDir = __DIR__ . '/../../uploads/';
+		$targetDir = __DIR__ . '/../uploads/';
 		$targetFile = $targetDir . basename($image['name']);
 
-		// Move the uploaded file to the target directory
+		if (!is_dir($targetDir)) {
+			http_response_code(500);
+			echo json_encode([
+				'status' => 'error',
+				'message' => 'Upload directory is not accesible'
+			]);
+			return;
+		}
+
+		if (!is_writable($targetDir)) {
+			http_response_code(500);
+			echo json_encode([
+				'status' => 'error',
+				'message' => 'Upload directory is not writable.',
+			]);
+			return;
+		}
+
 		if (!move_uploaded_file($image['tmp_name'], $targetFile)) {
 			http_response_code(500); // Internal Server Error
 			echo json_encode(['status' => 'error', 'message' => 'Failed to upload the image.']);

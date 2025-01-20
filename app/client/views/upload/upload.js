@@ -87,7 +87,6 @@ const tryFormPostUpload = async (file, caption) => {
     const formData = new FormData();
     formData.append("image", file);
     formData.append("description", caption);
-    console.log(formData);
     const response = await makeRequest(true, url, {
       method: "POST",
       mode: "cors",
